@@ -30,7 +30,13 @@ const pool = mysql.createPool(dbConfig);
 // Test database connection
 pool.getConnection((err, connection) => {
     if (err) {
-        console.error('Database connection failed:', err);
+        if (err.code === 'ECONNREFUSED') {
+            console.error('❌ MySQL server is not running!');
+            console.error('Please start XAMPP and ensure MySQL service is running on port 3306');
+            console.error('Then restart this application');
+        } else {
+            console.error('Database connection failed:', err);
+        }
         return;
     }
     console.log('Connected to MySQL database successfully!');
@@ -64,6 +70,27 @@ app.get('/', (req, res) => {
 app.post('/search', (req, res) => {
     const { patientId, firstName, middleName, lastName, suffix, birthdate } = req.body;
     
+    // Check if database is available before attempting query
+    pool.getConnection((connErr, testConnection) => {
+        if (connErr) {
+            if (connErr.code === 'ECONNREFUSED') {
+                return res.json({ 
+                    success: false, 
+                    error: 'Database server is not running. Please start XAMPP MySQL service.' 
+                });
+            }
+            return res.json({ 
+                success: false, 
+                error: 'Database connection error: ' + connErr.message 
+            });
+        }
+        testConnection.release();
+        
+        // Proceed with search query
+        performSearch();
+    });
+    
+    function performSearch() {
     // Build the search query (using your exact column names)
     let query = "SELECT * FROM patients WHERE 1=1";
     const params = [];
@@ -102,7 +129,12 @@ app.post('/search', (req, res) => {
             console.error('Database query error:', err);
             
             // Handle specific error types
-            if (err.code === 'PROTOCOL_CONNECTION_LOST' || err.code === 'ECONNRESET') {
+            if (err.code === 'ECONNREFUSED') {
+                return res.json({ 
+                    success: false, 
+                    error: 'Database server is not running. Please start XAMPP MySQL service.' 
+                });
+            } else if (err.code === 'PROTOCOL_CONNECTION_LOST' || err.code === 'ECONNRESET') {
                 return res.json({ 
                     success: false, 
                     error: 'Database connection lost. Please try again.' 
@@ -128,6 +160,7 @@ app.post('/search', (req, res) => {
             });
         }
     });
+    }
 });
 
 // Graceful shutdown

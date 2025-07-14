@@ -11,7 +11,12 @@
         }
         
         body {
-            background-color: #f5f7fa;
+            background-image: url('public/20250709_084103.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #f5f7fa; /* fallback color */
             margin: 0;
             padding: 20px;
             display: flex;
@@ -21,7 +26,8 @@
         }
         
         .container {
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             padding: 30px;

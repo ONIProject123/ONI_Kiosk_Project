@@ -1,0 +1,17 @@
+{
+    "security.workspace.trust.untrustedFiles": "open",
+    "workbench.editor.empty.hint": "hidden",
+    "phpcs.executablePath": "C:/Users/ABTC/AppData/Roaming/Composer/vendor/bin/phpcs.bat",
+    "php.validate.executablePath": "C:/xampp/php/php.exe",
+    "mssql.connectionGroups": [
+        {
+            "name": "ROOT",
+            "id": "19D8997B-3B0B-4750-A6D1-73D9522135FD"
+        }
+    ],
+    "database-client.autoSync": true,
+    "remote.SSH.remotePlatform": {
+        "github.com": "windows"
+    },
+    "cursor.general.disableHttp2": true
+}

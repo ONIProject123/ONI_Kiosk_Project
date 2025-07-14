@@ -11,21 +11,48 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-// Database connection (same as your XAMPP setup)
-const db = mysql.createConnection({
+// Database connection pool for better connection management
+const dbConfig = {
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'info'
-});
+    database: 'info',
+    acquireTimeout: 60000,
+    timeout: 60000,
+    reconnect: true,
+    connectionLimit: 10,
+    queueLimit: 0
+};
+
+// Create connection pool
+const pool = mysql.createPool(dbConfig);
 
 // Test database connection
-db.connect((err) => {
+pool.getConnection((err, connection) => {
     if (err) {
         console.error('Database connection failed:', err);
         return;
     }
     console.log('Connected to MySQL database successfully!');
+    connection.release();
+});
+
+// Handle connection errors
+pool.on('connection', function (connection) {
+    console.log('DB Connection established as id ' + connection.threadId);
+});
+
+pool.on('error', function(err) {
+    console.error('Database error:', err);
+    if(err.code === 'PROTOCOL_CONNECTION_LOST') {
+        console.log('Database connection was closed.');
+    }
+    if(err.code === 'ER_CON_COUNT_ERROR') {
+        console.log('Database has too many connections.');
+    }
+    if(err.code === 'ECONNREFUSED') {
+        console.log('Database connection was refused.');
+    }
 });
 
 // Serve the main page
@@ -69,10 +96,19 @@ app.post('/search', (req, res) => {
         params.push(birthdate.trim());
     }
     
-    // Execute the search query
-    db.query(query, params, (err, results) => {
+    // Execute the search query using connection pool
+    pool.query(query, params, (err, results) => {
         if (err) {
             console.error('Database query error:', err);
+            
+            // Handle specific error types
+            if (err.code === 'PROTOCOL_CONNECTION_LOST' || err.code === 'ECONNRESET') {
+                return res.json({ 
+                    success: false, 
+                    error: 'Database connection lost. Please try again.' 
+                });
+            }
+            
             return res.json({ 
                 success: false, 
                 error: 'Database error: ' + err.message 
@@ -91,6 +127,23 @@ app.post('/search', (req, res) => {
                 error: 'NO RECORD FOUND!' 
             });
         }
+    });
+});
+
+// Graceful shutdown
+process.on('SIGINT', () => {
+    console.log('Shutting down gracefully...');
+    pool.end(() => {
+        console.log('Database pool closed.');
+        process.exit(0);
+    });
+});
+
+process.on('SIGTERM', () => {
+    console.log('Shutting down gracefully...');
+    pool.end(() => {
+        console.log('Database pool closed.');
+        process.exit(0);
     });
 });
 

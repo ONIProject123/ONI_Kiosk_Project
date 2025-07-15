@@ -20,6 +20,29 @@
             background-attachment: fixed;
             background-color: #f5f7fa; /* fallback color */
             min-height: 100vh;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: inherit;
+            filter: blur(2px) brightness(0.85);
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: rgba(30, 175, 150, 0.18); /* subtle blue-green overlay */
+            pointer-events: none;
         }
         
         .main-header {
@@ -33,10 +56,11 @@
             right: 0;
             width: 100%;
             z-index: 100;
+            position: relative;
         }
         
         .page-content {
-            margin-top: 80px; /* Account for fixed header height */
+            margin-top: 10px;
             padding: 20px;
             display: flex;
             justify-content: center;
@@ -45,10 +69,9 @@
         }
         
         .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
+            width: 100%;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             padding: 0 20px;
         }
@@ -56,13 +79,18 @@
         .header-left {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 32px;
         }
         
         .header-logo {
-            width: 50px;
-            height: 50px;
+            width: 80px;
+            height: 80px;
             object-fit: contain;
+            background: white;
+            border-radius: 50%;
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            padding: 6px;
         }
         
         .header-text h1 {
@@ -246,6 +274,29 @@
             color: #4a5568;
         }
         
+        .header-center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 100%;
+            pointer-events: none;
+        }
+        .header-title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: white;
+        }
+        .header-subtitle {
+            font-size: 1.1rem;
+            font-family: 'Times New Roman', Times, serif;
+            font-style: italic;
+            color: white;
+            margin-top: 2px;
+        }
+        
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -272,11 +323,13 @@
     <header class="main-header">
         <div class="header-content">
             <div class="header-left">
-                <img src="Ph_seal_Imus.png" alt="Imus City Logo" class="header-logo">
-                <div class="header-text">
-                    <h1>Ospital ng Imus</h1>
-                    <p>City Government of Imus</p>
-                </div>
+                <img src="Ph_seal_Imus.png" alt="Imus City Official Seal" class="header-logo">
+                <img src="20250625_092038.jpg" alt="City of Imus Logo" class="header-logo">
+                <img src="20250625_092019.jpg" alt="Ospital ng Imus Logo" class="header-logo">
+            </div>
+            <div class="header-center">
+                <div class="header-title">OSPITAL NG IMUS</div>
+                <div class="header-subtitle">We Serve, We Care</div>
             </div>
         </div>
     </header>

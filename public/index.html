@@ -229,10 +229,13 @@
         
         .patient-record {
             background-color: white;
-            padding: 20px;
+            padding: 32px 48px;
             margin-bottom: 15px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .patient-record h3 {
@@ -330,13 +333,110 @@
             z-index: 9999;
         }
         .modal-content {
-            background: #fff;
-            border-radius: 12px;
+            background: linear-gradient(120deg, #b2f7ef 0%, #e0fcff 100%);
+            border-radius: 18px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-            padding: 32px 24px 24px 24px;
-            max-width: 500px;
+            padding: 0;
+            max-width: 750px;
+            min-width: 600px;
             width: 95vw;
             position: relative;
+            border: 3px solid #4a90e2;
+            overflow: hidden;
+        }
+        .patient-record-id-header {
+            background: linear-gradient(90deg, #4a90e2 0%, #3fd88c 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 32px 10px 32px;
+        }
+        .id-logo {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            background: #fff;
+            border-radius: 50%;
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+        .id-header-center {
+            text-align: center;
+            flex: 1;
+        }
+        .id-hospital-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1e3a8a;
+            letter-spacing: 1px;
+        }
+        .id-hospital-address {
+            font-size: 1.1rem;
+            color: #198450;
+            margin-bottom: 2px;
+        }
+        .id-hospital-sub {
+            font-size: 1rem;
+            color: #333;
+        }
+        .patient-record-id-body {
+            display: flex;
+            flex-direction: row;
+            padding: 32px 32px 16px 32px;
+            gap: 36px;
+            background: transparent;
+        }
+        .id-photo-section {
+            flex: 0 0 180px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        .id-photo-placeholder {
+            width: 150px;
+            height: 150px;
+            background: #e2e8f0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png');
+            background-size: 60%;
+            background-repeat: no-repeat;
+            background-position: center;
+            border: 2px solid #4a90e2;
+        }
+        .id-info-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: flex-start;
+            font-size: 1.15rem;
+        }
+        .id-info-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 2px;
+        }
+        .id-label {
+            font-weight: 700;
+            color: #222;
+            min-width: 120px;
+            display: inline-block;
+        }
+        .id-value {
+            font-weight: 500;
+            color: #1e3a8a;
+            word-break: break-word;
+        }
+        .id-slogan {
+            text-align: right;
+            font-style: italic;
+            color: #198450;
+            font-size: 1.2rem;
+            font-family: 'Times New Roman', Times, serif;
+            padding: 0 32px 18px 0;
         }
         .close-modal-btn {
             position: absolute;
@@ -465,34 +565,44 @@
                     let html = '<div class="results-container">';
                     html += `<h2>Patient Record Found! (${result.count} record(s) found)</h2>`;
                     result.records.forEach(record => {
-                        html += '<div class="patient-record">';
-                        html += '<h3>Patient Record</h3>';
-                        // Combine name fields for display with proper capitalization and fallback
+                        html += '<div class="patient-record-id-header">';
+                        html += '<img src="Ph_seal_Imus.png" class="id-logo" alt="Imus Seal">';
+                        html += '<div class="id-header-center">';
+                        html += '<div class="id-hospital-sub">Republic of the Philippines<br>Province of Cavite<br>City of Imus</div>';
+                        html += '<div class="id-hospital-title">OSPITAL NG IMUS</div>';
+                        html += '<div class="id-hospital-address">Pedro Reyes St., Malagasang 1-G</div>';
+                        html += '<div style="font-weight:bold;font-size:1.15rem;margin-top:6px;letter-spacing:1px;">PATIENT INFORMATION</div>';
+                        html += '</div>';
+                        html += '<img src="20250625_092019.jpg" class="id-logo" alt="Ospital ng Imus Logo">';
+                        html += '</div>';
+                        html += '<div class="patient-record-id-body">';
+                        html += '<div class="id-photo-section">';
+                        html += '<div class="id-photo-placeholder"></div>';
+                        html += '</div>';
+                        html += '<div class="id-info-section">';
                         function cap(str) { return str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : ''; }
                         const firstName = cap(record.firstname || record.first_name || record["First Name"] || '');
                         const middleName = cap(record.middlename || record.middle_name || record["Middle Name"] || '');
                         const lastName = cap(record.lastname || record.last_name || record["Last Name"] || '');
                         let fullName = [firstName, middleName, lastName].filter(Boolean).join(' ');
                         if (!fullName) fullName = '-';
-                        html += '<div class="record-field">';
-                        html += `<strong>Fullname:</strong> ${fullName}`;
+                        const patientId = record.patientId || record.patient_id || record["Patient ID"] || '-';
+                        const birthdate = (record.birthdate || record.Birthdate || '').split('T')[0] || '-';
+                        const age = record.age || record.Age || '-';
+                        const address = record.address || record.Address || '-';
+                        const mobile = record.mobile || record.mobile_no || record["Mobile No."] || '-';
+                        const phic = record.phic || record.phic_no || record["PhilHealth No."] || '-';
+                        html += `<div class="id-info-row"><span class="id-label">Patient's ID:</span> <span class="id-value">${patientId}</span></div>`;
+                        html += `<div class="id-info-row"><span class="id-label">Fullname:</span> <span class="id-value">${fullName}</span></div>`;
+                        html += `<div class="id-info-row"><span class="id-label">Birthdate:</span> <span class="id-value">${birthdate}</span></div>`;
+                        html += `<div class="id-info-row"><span class="id-label">Age:</span> <span class="id-value">${age}</span></div>`;
+                        html += `<div class="id-info-row"><span class="id-label">Address:</span> <span class="id-value">${address}</span></div>`;
+                        html += `<div class="id-info-row"><span class="id-label">Mobile No.:</span> <span class="id-value">${mobile}</span></div>`;
+                        html += `<div class="id-info-row"><span class="id-label">PHIC No.:</span> <span class="id-value">${phic}</span></div>`;
                         html += '</div>';
-                        // Display all other fields except the name fields (case-insensitive, strict)
-                        Object.entries(record).forEach(([field, value]) => {
-                            const lower = field.toLowerCase();
-                            if (["firstname","first_name","middlename","middle_name","lastname","last_name","first name","middle name","last name"].includes(lower)) return;
-                            if (value !== null && value !== '') {
-                                const fieldName = field.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-                                let displayValue = value;
-                                if (lower === 'birthdate' && typeof value === 'string') {
-                                    displayValue = value.split('T')[0];
-                                }
-                                html += '<div class="record-field">';
-                                html += `<strong>${fieldName}:</strong> ${displayValue}`;
-                                html += '</div>';
-                            }
-                        });
                         html += '</div>';
+                        html += '</div>';
+                        html += '<div class="id-slogan">We Serve, We Care</div>';
                     });
                     html += '</div>';
                     document.getElementById('modal-record').innerHTML = html;
@@ -517,6 +627,32 @@
                 document.getElementById('patient-modal').style.display = 'none';
             });
         });
+
+        // Add Print button to modal
+        const printBtnHtml = '<button id="print-patient-id" class="btn-submit" style="width:auto;float:right;margin-bottom:16px;">��️ Print</button>';
+        document.getElementById('modal-record').insertAdjacentHTML('beforebegin', printBtnHtml);
+
+        // Print function
+        function printPatientIdCard() {
+            const card = document.querySelector('.modal-content');
+            if (!card) return;
+            const printWindow = window.open('', '', 'width=900,height=700');
+            printWindow.document.write('<html><head><title>Print Patient ID</title>');
+            // Copy styles
+            const styles = Array.from(document.querySelectorAll('style,link[rel="stylesheet"]')).map(style => style.outerHTML).join('');
+            printWindow.document.write(styles);
+            printWindow.document.write('</head><body>');
+            printWindow.document.write(card.outerHTML);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.focus();
+            setTimeout(() => { printWindow.print(); printWindow.close(); }, 500);
+        }
+        // Attach event
+        setTimeout(() => {
+            const btn = document.getElementById('print-patient-id');
+            if (btn) btn.onclick = printPatientIdCard;
+        }, 100);
     </script>
 </body>
 </html>

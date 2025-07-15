@@ -11,7 +11,7 @@
         }
         
         body {
-            background-image: url('public/20250709_084103.jpg');
+            background-image: url('public/image.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -26,34 +26,22 @@
         }
         
         .container {
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             padding: 30px;
             width: 100%;
             max-width: 800px;
+            margin-top: 100px;
         }
         
         .header-container {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 15px;
-        }
-        
-        .header-logo {
-            width: 50px;
-            height: 50px;
-            object-fit: contain;
-            margin-right: 15px;
-        }
-        
-        .header-container h1 {
+            text-align: center;
             color: #2d3748;
-            margin: 0;
-            font-size: 24px;
+            font-size: 28px;
+            margin: 20px 0;
+            font-weight: 600;
         }
         
         .form-group {
@@ -197,13 +185,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="header-container">
-            <img src="public/Ph_seal_Imus.png" alt="Imus City Logo" class="header-logo">
-            <div>
-                <h1 style="margin: 0; font-size: 28px; color: #2d3748;">Welcome to Ospital ng Imus</h1>
-                <h2 style="margin: 5px 0 0 0; font-size: 20px; color: #4a5568; font-weight: 500;">Patient Records Search</h2>
-            </div>
-        </div>
+        <h1 class="header-container">Patient Records Search</h1>
         <form method="POST" action="">
             <div class="form-group">
                 <label for="patientId">Patient ID</label>

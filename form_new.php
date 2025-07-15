@@ -199,7 +199,10 @@
     <div class="container">
         <div class="header-container">
             <img src="public/Ph_seal_Imus.png" alt="Imus City Logo" class="header-logo">
-            <h1>Patient Records Search</h1>
+            <div>
+                <h1 style="margin: 0; font-size: 28px; color: #2d3748;">Welcome to Ospital ng Imus</h1>
+                <h2 style="margin: 5px 0 0 0; font-size: 20px; color: #4a5568; font-weight: 500;">Patient Records Search</h2>
+            </div>
         </div>
         <form method="POST" action="">
             <div class="form-group">

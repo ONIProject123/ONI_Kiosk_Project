@@ -284,14 +284,6 @@
                     <p>City Government of Imus</p>
                 </div>
             </div>
-            <div class="header-right">
-                <nav class="header-nav">
-                    <a href="#" class="nav-link">Home</a>
-                    <a href="#" class="nav-link">Services</a>
-                    <a href="#" class="nav-link">About</a>
-                    <a href="#" class="nav-link">Contact</a>
-                </nav>
-            </div>
         </div>
     </header>
     

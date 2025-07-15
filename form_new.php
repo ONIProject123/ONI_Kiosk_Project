@@ -11,17 +11,14 @@
         }
         
         body {
+            margin: 0;
+            padding: 0;
             background-image: url('public/20250709_084103.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-color: #f5f7fa; /* fallback color */
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
         }
         
@@ -30,9 +27,21 @@
             color: white;
             padding: 15px 0;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
             z-index: 100;
+        }
+        
+        .page-content {
+            margin-top: 80px; /* Account for fixed header height */
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 80px);
         }
         
         .header-content {
@@ -286,7 +295,8 @@
         </div>
     </header>
     
-    <div class="container">
+    <div class="page-content">
+        <div class="container">
         <div class="form-header">
             <h2>Patient Records Search</h2>
             <p>Please fill in the required information to search for patient records</p>
@@ -449,6 +459,7 @@
             $conn->close();
         }
         ?>
+        </div>
     </div>
 </body>
 </html>

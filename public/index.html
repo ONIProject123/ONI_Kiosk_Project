@@ -46,7 +46,7 @@
         }
         
         .main-header {
-            background: linear-gradient(135deg, #2d5aa0 0%, #1e3a8a 100%);
+            background: linear-gradient(135deg, #4a90e2 0%, #4169e1 50%, #3fd88c 100%);
             color: white;
             padding: 15px 0;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -198,7 +198,7 @@
         }
         
         .btn-submit {
-            background-color: #4299e1;
+            background: linear-gradient(135deg, #4a90e2 0%, #4169e1 50%, #3fd88c 100%);
             color: white;
             border: none;
             padding: 12px 24px;
@@ -206,12 +206,12 @@
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background 0.3s;
             width: 100%;
         }
         
         .btn-submit:hover {
-            background-color: #3182ce;
+            filter: brightness(0.95);
         }
         
         .btn-submit:disabled {
@@ -317,6 +317,44 @@
                 padding: 20px;
             }
         }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        .modal-content {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+            padding: 32px 24px 24px 24px;
+            max-width: 500px;
+            width: 95vw;
+            position: relative;
+        }
+        .close-modal-btn {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: #4299e1;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 18px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .close-modal-btn:hover {
+            background: #2b6cb0;
+        }
     </style>
 </head>
 <body>
@@ -387,6 +425,12 @@
 
         <div id="results"></div>
         </div>
+        <div id="patient-modal" class="modal-overlay" style="display:none;">
+            <div class="modal-content">
+                <button id="close-modal" class="close-modal-btn">&larr; Back</button>
+                <div id="modal-record"></div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -417,29 +461,43 @@
                 const result = await response.json();
                 
                 if (result.success) {
-                    // Display results
+                    // Show patient record in modal popup
                     let html = '<div class="results-container">';
                     html += `<h2>Patient Record Found! (${result.count} record(s) found)</h2>`;
-                    
                     result.records.forEach(record => {
                         html += '<div class="patient-record">';
                         html += '<h3>Patient Record</h3>';
-                        
-                        // Display all available fields
+                        // Combine name fields for display with proper capitalization and fallback
+                        function cap(str) { return str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : ''; }
+                        const firstName = cap(record.firstname || record.first_name || record["First Name"] || '');
+                        const middleName = cap(record.middlename || record.middle_name || record["Middle Name"] || '');
+                        const lastName = cap(record.lastname || record.last_name || record["Last Name"] || '');
+                        let fullName = [firstName, middleName, lastName].filter(Boolean).join(' ');
+                        if (!fullName) fullName = '-';
+                        html += '<div class="record-field">';
+                        html += `<strong>Fullname:</strong> ${fullName}`;
+                        html += '</div>';
+                        // Display all other fields except the name fields (case-insensitive, strict)
                         Object.entries(record).forEach(([field, value]) => {
+                            const lower = field.toLowerCase();
+                            if (["firstname","first_name","middlename","middle_name","lastname","last_name","first name","middle name","last name"].includes(lower)) return;
                             if (value !== null && value !== '') {
                                 const fieldName = field.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                                let displayValue = value;
+                                if (lower === 'birthdate' && typeof value === 'string') {
+                                    displayValue = value.split('T')[0];
+                                }
                                 html += '<div class="record-field">';
-                                html += `<strong>${fieldName}:</strong> ${value}`;
+                                html += `<strong>${fieldName}:</strong> ${displayValue}`;
                                 html += '</div>';
                             }
                         });
-                        
                         html += '</div>';
                     });
-                    
                     html += '</div>';
-                    resultsDiv.innerHTML = html;
+                    document.getElementById('modal-record').innerHTML = html;
+                    document.getElementById('patient-modal').style.display = 'flex';
+                    resultsDiv.innerHTML = '';
                 } else {
                     // Display error
                     resultsDiv.innerHTML = `<div class="error-message">${result.error}</div>`;
@@ -452,6 +510,12 @@
             // Reset button
             submitBtn.disabled = false;
             submitBtn.textContent = 'Search Patient Records';
+        });
+        // Modal close button handler
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('close-modal').addEventListener('click', function() {
+                document.getElementById('patient-modal').style.display = 'none';
+            });
         });
     </script>
 </body>

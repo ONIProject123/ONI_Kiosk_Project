@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Record</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Segoe+UI:400,700&display=swap">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 40px;
+        }
+        h2 {
+            color: #2d3748;
+        }
+        h3 {
+            color: #2d3748;
+        }
+        .results-container {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        .patient-record {
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .patient-record h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+        .record-field {
+            margin-bottom: 10px;
+        }
+        .record-field strong {
+            color: #4a5568;
+            display: inline-block;
+            width: 120px;
+        }
+    </style>
+</head>
+<body>
+    <div id="record-root"></div>
+    <script>
+        // Get patient record data from sessionStorage
+        const recordData = sessionStorage.getItem('patientRecordData');
+        const recordRoot = document.getElementById('record-root');
+        if (recordData) {
+            const result = JSON.parse(recordData);
+            let html = '<div class="results-container">';
+            html += `<h2>Patient Record Found! (${result.count} record(s) found)</h2>`;
+            result.records.forEach(record => {
+                html += '<div class="patient-record">';
+                html += '<h3>Patient Record</h3>';
+                Object.entries(record).forEach(([field, value]) => {
+                    if (value !== null && value !== '') {
+                        const fieldName = field.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                        html += '<div class="record-field">';
+                        html += `<strong>${fieldName}:</strong> ${value}`;
+                        html += '</div>';
+                    }
+                });
+                html += '</div>';
+            });
+            html += '</div>';
+            recordRoot.innerHTML = html;
+        } else {
+            recordRoot.innerHTML = '<div class="error-message">No patient record data found. Please search again.</div>';
+        }
+    </script>
+</body>
+</html> 

@@ -33,14 +33,26 @@
             padding: 30px;
             width: 100%;
             max-width: 800px;
+            position: relative;
+        }
+        
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            z-index: 10;
         }
         
         h1 {
             color: #2d3748;
-            margin-bottom: 25px;
+            margin: 0 0 25px 80px;
             font-size: 24px;
             border-bottom: 2px solid #e2e8f0;
             padding-bottom: 10px;
+            padding-top: 10px;
         }
         
         .form-group {
@@ -184,6 +196,7 @@
 </head>
 <body>
     <div class="container">
+        <img src="public/Ph_seal_Imus.png" alt="Imus City Logo" class="logo">
         <h1>Patient Records Search</h1>
         <form method="POST" action="">
             <div class="form-group">

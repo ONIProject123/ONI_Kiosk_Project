@@ -33,26 +33,27 @@
             padding: 30px;
             width: 100%;
             max-width: 800px;
-            position: relative;
         }
         
-        .logo {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
-            z-index: 10;
-        }
-        
-        h1 {
-            color: #2d3748;
-            margin: 0 0 25px 80px;
-            font-size: 24px;
+        .header-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
             border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 10px;
-            padding-top: 10px;
+            padding-bottom: 15px;
+        }
+        
+        .header-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            margin-right: 15px;
+        }
+        
+        .header-container h1 {
+            color: #2d3748;
+            margin: 0;
+            font-size: 24px;
         }
         
         .form-group {
@@ -196,8 +197,10 @@
 </head>
 <body>
     <div class="container">
-        <img src="public/Ph_seal_Imus.png" alt="Imus City Logo" class="logo">
-        <h1>Patient Records Search</h1>
+        <div class="header-container">
+            <img src="public/Ph_seal_Imus.png" alt="Imus City Logo" class="header-logo">
+            <h1>Patient Records Search</h1>
+        </div>
         <form method="POST" action="">
             <div class="form-group">
                 <label for="patientId">Patient ID</label>

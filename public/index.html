@@ -337,19 +337,19 @@
             border-radius: 18px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.18);
             padding: 0;
-            max-width: 750px;
-            min-width: 600px;
+            max-width: 900px;
+            min-width: 750px;
             width: 95vw;
             position: relative;
             border: 3px solid #4a90e2;
             overflow: hidden;
         }
         .patient-record-id-header {
-            background: linear-gradient(90deg, #4a90e2 0%, #3fd88c 100%);
+            background: linear-gradient(90deg, #4ed6e5 0%, #6be6b1 100%);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 18px 32px 10px 32px;
+            padding: 20px 30px 12px 30px;
         }
         .id-logo {
             width: 70px;
@@ -363,27 +363,28 @@
         .id-header-center {
             text-align: center;
             flex: 1;
+            margin: 0 20px;
         }
         .id-hospital-title {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: bold;
             color: #1e3a8a;
             letter-spacing: 1px;
         }
         .id-hospital-address {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: #198450;
             margin-bottom: 2px;
         }
         .id-hospital-sub {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: #333;
         }
         .patient-record-id-body {
             display: flex;
             flex-direction: row;
-            padding: 32px 32px 16px 32px;
-            gap: 36px;
+            padding: 36px 30px 20px 30px;
+            gap: 40px;
             background: transparent;
         }
         .id-photo-section {
@@ -393,8 +394,8 @@
             justify-content: center;
         }
         .id-photo-placeholder {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             background: #e2e8f0;
             border-radius: 12px;
             display: flex;
@@ -410,19 +411,19 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             justify-content: flex-start;
-            font-size: 1.15rem;
+            font-size: 1.25rem;
         }
         .id-info-row {
             display: flex;
-            gap: 10px;
-            margin-bottom: 2px;
+            gap: 12px;
+            margin-bottom: 4px;
         }
         .id-label {
             font-weight: 700;
             color: #222;
-            min-width: 120px;
+            min-width: 140px;
             display: inline-block;
         }
         .id-value {
@@ -434,9 +435,9 @@
             text-align: right;
             font-style: italic;
             color: #198450;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-family: 'Times New Roman', Times, serif;
-            padding: 0 32px 18px 0;
+            padding: 0 30px 20px 0;
         }
         .close-modal-btn {
             position: absolute;
@@ -454,6 +455,14 @@
         }
         .close-modal-btn:hover {
             background: #2b6cb0;
+        }
+        .id-patient-info-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 10px 0 12px 0;
+            letter-spacing: 1px;
+            color: #1e3a8a;
+            text-align: center;
         }
     </style>
 </head>
@@ -571,13 +580,15 @@
                         html += '<div class="id-hospital-sub">Republic of the Philippines<br>Province of Cavite<br>City of Imus</div>';
                         html += '<div class="id-hospital-title">OSPITAL NG IMUS</div>';
                         html += '<div class="id-hospital-address">Pedro Reyes St., Malagasang 1-G</div>';
-                        html += '<div style="font-weight:bold;font-size:1.15rem;margin-top:6px;letter-spacing:1px;">PATIENT INFORMATION</div>';
                         html += '</div>';
                         html += '<img src="20250625_092019.jpg" class="id-logo" alt="Ospital ng Imus Logo">';
                         html += '</div>';
+                        html += '<div class="id-patient-info-title">PATIENT INFORMATION</div>';
                         html += '<div class="patient-record-id-body">';
                         html += '<div class="id-photo-section">';
-                        html += '<div class="id-photo-placeholder"></div>';
+                        html += '<div class="id-photo-placeholder" id="patient-photo-placeholder" style="position:relative;">';
+                        html += '<button id="camera-btn" type="button" style="position:absolute;bottom:8px;right:8px;background:#4a90e2;border:none;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,0.12);z-index:2;">📷</button>';
+                        html += '</div>';
                         html += '</div>';
                         html += '<div class="id-info-section">';
                         function cap(str) { return str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : ''; }
@@ -601,58 +612,210 @@
                         html += `<div class="id-info-row"><span class="id-label">PHIC No.:</span> <span class="id-value">${phic}</span></div>`;
                         html += '</div>';
                         html += '</div>';
-                        html += '</div>';
                         html += '<div class="id-slogan">We Serve, We Care</div>';
                     });
-                    html += '</div>';
                     document.getElementById('modal-record').innerHTML = html;
                     document.getElementById('patient-modal').style.display = 'flex';
-                    resultsDiv.innerHTML = '';
                 } else {
-                    // Display error
-                    resultsDiv.innerHTML = `<div class="error-message">${result.error}</div>`;
+                    resultsDiv.innerHTML = '<div class="error-message">No patient record found for the provided details.</div>';
                 }
-                
             } catch (error) {
-                resultsDiv.innerHTML = `<div class="error-message">Connection error: ${error.message}</div>`;
+                resultsDiv.innerHTML = '<div class="error-message">An error occurred while searching for patient records.</div>';
+                console.error('Error:', error);
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Search Patient Records';
             }
-            
-            // Reset button
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Search Patient Records';
         });
-        // Modal close button handler
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('close-modal').addEventListener('click', function() {
-                document.getElementById('patient-modal').style.display = 'none';
-            });
+
+        document.getElementById('close-modal').addEventListener('click', function() {
+            document.getElementById('patient-modal').style.display = 'none';
+        });
+
+        // Close modal when clicking outside the modal content
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('patient-modal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
         });
 
         // Add Print button to modal
         const printBtnHtml = '<button id="print-patient-id" class="btn-submit" style="width:auto;float:right;margin-bottom:16px;">��️ Print</button>';
         document.getElementById('modal-record').insertAdjacentHTML('beforebegin', printBtnHtml);
-
         // Print function
         function printPatientIdCard() {
             const card = document.querySelector('.modal-content');
             if (!card) return;
             const printWindow = window.open('', '', 'width=900,height=700');
             printWindow.document.write('<html><head><title>Print Patient ID</title>');
-            // Copy styles
+            // Copy styles and add print-specific CSS
             const styles = Array.from(document.querySelectorAll('style,link[rel="stylesheet"]')).map(style => style.outerHTML).join('');
             printWindow.document.write(styles);
+            printWindow.document.write(`
+                <style>
+                    @media print {
+                        body { margin: 0; padding: 0; }
+                        .modal-content {
+                            width: 420px !important;
+                            height: 298px !important;
+                            max-width: 420px !important;
+                            min-width: 420px !important;
+                            margin: 0 !important;
+                            padding: 0 !important;
+                            border-radius: 6px !important;
+                            overflow: hidden !important;
+                            page-break-inside: avoid !important;
+                        }
+                        .results-container h2 {
+                            display: none !important;
+                        }
+                        .patient-record-id-header {
+                            padding: 6px 12px 4px 12px !important;
+                            height: 60px !important;
+                            border-top: none !important;
+                            box-shadow: none !important;
+                            background: linear-gradient(90deg, #4ed6e5 0%, #6be6b1 100%) !important;
+                        }
+                        .id-logo {
+                            width: 55px !important;
+                            height: 55px !important;
+                        }
+                        .id-hospital-title {
+                            font-size: 1.1rem !important;
+                            margin: 0 !important;
+                        }
+                        .id-hospital-address {
+                            font-size: 0.65rem !important;
+                            margin: 0 !important;
+                        }
+                        .id-hospital-sub {
+                            font-size: 0.55rem !important;
+                            margin: 0 !important;
+                            line-height: 1.1 !important;
+                        }
+                        .patient-record-id-body {
+                            padding: 12px 12px 6px 12px !important;
+                            gap: 16px !important;
+                            height: 200px !important;
+                        }
+                        .id-photo-section {
+                            flex: 0 0 60px !important;
+                        }
+                        .id-photo-placeholder {
+                            width: 55px !important;
+                            height: 55px !important;
+                            border-radius: 6px !important;
+                        }
+                        .id-info-section {
+                            font-size: 0.65rem !important;
+                            gap: 2px !important;
+                            flex: 1 !important;
+                        }
+                        .id-info-row {
+                            gap: 4px !important;
+                            margin-bottom: 1px !important;
+                            line-height: 1.1 !important;
+                        }
+                        .id-label {
+                            min-width: 55px !important;
+                            font-size: 0.6rem !important;
+                            font-weight: 600 !important;
+                        }
+                        .id-value {
+                            font-size: 0.6rem !important;
+                            word-break: break-word !important;
+                        }
+                        .id-slogan {
+                            font-size: 0.65rem !important;
+                            padding: 0 12px 6px 0 !important;
+                            position: absolute !important;
+                            bottom: 4px !important;
+                            right: 0 !important;
+                        }
+                        #print-patient-id, #close-modal { display: none !important; }
+                        .id-patient-info-title {
+                            font-size: 0.85rem !important;
+                        }
+                    }
+                </style>
+            `);
             printWindow.document.write('</head><body>');
             printWindow.document.write(card.outerHTML);
             printWindow.document.write('</body></html>');
             printWindow.document.close();
             printWindow.focus();
-            setTimeout(() => { printWindow.print(); printWindow.close(); }, 500);
+            setTimeout(() => { 
+                printWindow.print(); 
+                printWindow.close(); 
+            }, 500);
         }
         // Attach event
         setTimeout(() => {
             const btn = document.getElementById('print-patient-id');
             if (btn) btn.onclick = printPatientIdCard;
         }, 100);
+
+        // Camera and photo upload logic
+        setTimeout(() => {
+          const cameraBtn = document.getElementById('camera-btn');
+          const photoPlaceholder = document.getElementById('patient-photo-placeholder');
+          if (cameraBtn && photoPlaceholder) {
+            cameraBtn.onclick = async function() {
+              // Create video and canvas elements
+              let video = document.createElement('video');
+              video.style.width = '100%';
+              video.style.height = '100%';
+              video.style.objectFit = 'cover';
+              video.autoplay = true;
+              video.playsInline = true;
+              video.style.borderRadius = '12px';
+              video.style.position = 'absolute';
+              video.style.top = 0;
+              video.style.left = 0;
+              video.style.zIndex = 10;
+              let captureBtn = document.createElement('button');
+              captureBtn.textContent = 'Capture';
+              captureBtn.style.position = 'absolute';
+              captureBtn.style.bottom = '8px';
+              captureBtn.style.left = '50%';
+              captureBtn.style.transform = 'translateX(-50%)';
+              captureBtn.style.background = '#198450';
+              captureBtn.style.color = '#fff';
+              captureBtn.style.border = 'none';
+              captureBtn.style.borderRadius = '6px';
+              captureBtn.style.padding = '4px 16px';
+              captureBtn.style.zIndex = 20;
+              // Start camera
+              try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+                photoPlaceholder.appendChild(video);
+                photoPlaceholder.appendChild(captureBtn);
+                cameraBtn.style.display = 'none';
+                captureBtn.onclick = function() {
+                  let canvas = document.createElement('canvas');
+                  canvas.width = video.videoWidth;
+                  canvas.height = video.videoHeight;
+                  let ctx = canvas.getContext('2d');
+                  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                  let imgData = canvas.toDataURL('image/png');
+                  // Remove video and button
+                  video.srcObject.getTracks().forEach(track => track.stop());
+                  video.remove();
+                  captureBtn.remove();
+                  // Set captured image as background
+                  photoPlaceholder.style.backgroundImage = `url('${imgData}')`;
+                  photoPlaceholder.style.backgroundSize = 'cover';
+                  photoPlaceholder.style.backgroundPosition = 'center';
+                  cameraBtn.style.display = 'block';
+                };
+              } catch (err) {
+                alert('Unable to access camera: ' + err.message);
+              }
+            };
+          }
+        }, 200);
     </script>
 </body>
 </html>

@@ -60,7 +60,7 @@
         }
         
         .page-content {
-            margin-top: 10px;
+            margin-top: 0px;
             padding: 20px;
             display: flex;
             justify-content: center;
@@ -128,7 +128,7 @@
             padding: 30px;
             width: 100%;
             max-width: 800px;
-            margin-top: 0px;
+            margin-top: -440px;
         }
         
         .form-header {
@@ -182,7 +182,7 @@
         
         input:focus, select:focus {
             outline: none;
-            border-color: #4299e1;
+            border-color: #ffffff;
             box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
         }
         
@@ -485,66 +485,90 @@
                 <div class="header-title">OSPITAL NG IMUS</div>
                 <div class="header-subtitle">We Serve, We Care</div>
             </div>
+            <div class="header-nav" style="margin-left:auto;">
+                <a href="#" id="about-oni-link" class="nav-link" style="font-size:1.1rem;font-weight:600;">About ONI</a>
+            </div>
         </div>
     </header>
-    <div style="width:100%;background:transparent;margin:0;padding:0;">
+    <div style="width:100%;background:transparent;margin:0%;padding:0;">
         <div style="width:100%;border-top:2px solid #fff;position:relative;">
             <div id="header-datetime" style="text-align:left;padding:0 18px;font-size:1.1rem;font-weight:500;color:#2d3748;line-height:1;background:#fff;">DATE_TIME_HERE</div>
         </div>
+        <!-- Floor Directory Button Start -->
+        <div id="floor-directory-container" style="width:100%;display:flex;justify-content:flex-start;margin-top:80px;margin-left:32px;">
+            <div style="background:#fff;border:2px solid #ffffff;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08);padding:0;min-width:220px;">
+                <div style="display:flex;align-items:center;gap:8px;padding:10px 16px 6px 16px;font-weight:600;font-size:1.1rem;color:#222;">
+                    <span style="font-size:1.3rem;">🏢</span> Floor Directory
+                </div>
+                <select id="floor-directory-select" style="width:100%;padding:10px 16px;font-size:1rem;font-weight:500;border:none;outline:none;background:transparent;cursor:pointer;">
+                    <option value="ground">Ground Floor</option>
+                    <option value="first">1st Floor</option>
+                    <option value="second">2nd Floor</option>
+                </select>
+            </div>
+        </div>
+        <!-- Floor Directory Button End -->
     </div>
     
     <div class="page-content">
-        <div class="container">
-        <div class="form-header">
-            <h2>Patient Records Search</h2>
-            <p>Please fill in the required information to search for patient records</p>
+        <div class="container" id="main-dashboard-content">
+            <div class="form-header">
+                <h2>Welcome to Ospital ng Imus!</h2>
+                <p>Please fill in the required information to search for patient records</p>
+            </div>
+            <form id="searchForm">
+                <div class="form-group">
+                    <label for="patientId">Patient ID</label>
+                    <input type="text" id="patientId" name="patientId" placeholder="Patient ID">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName" class="required">First Name</label>
+                        <input type="text" id="firstName" name="firstName" required placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="middleName">Middle Name</label>
+                        <input type="text" id="middleName" name="middleName" placeholder="Middle Name">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="lastName" class="required">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" required placeholder="Last Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="suffix">Suffix</label>
+                        <select id="suffix" name="suffix">
+                            <option value="">None</option>
+                            <option value="Jr">Jr</option>
+                            <option value="Sr">Sr</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                            <option value="IV">IV</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="birthdate" class="required">Date of Birth</label>
+                    <input type="date" id="birthdate" name="birthdate" required>
+                </div>
+                <button type="submit" class="btn-submit">Search Patient Records</button>
+            </form>
+            <div id="results"></div>
         </div>
-        <form id="searchForm">
-            <div class="form-group">
-                <label for="patientId">Patient ID</label>
-                <input type="text" id="patientId" name="patientId" placeholder="Optional patient ID">
+        <div id="about-oni-info" class="container" style="display:none;">
+            <div class="form-header">
+                <h2>About Ospital ng Imus</h2>
+                <p>This is a placeholder for the Ospital ng Imus information. (Add your info here.)</p>
             </div>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="firstName" class="required">First Name</label>
-                    <input type="text" id="firstName" name="firstName" required placeholder="Required first name">
-                </div>
-                
-                <div class="form-group">
-                    <label for="middleName">Middle Name</label>
-                    <input type="text" id="middleName" name="middleName" placeholder="Optional middle name">
-                </div>
+            <button id="close-about-oni" style="margin-top:20px;padding:10px 24px;font-size:1rem;font-weight:600;background:#4a90e2;color:#fff;border:none;border-radius:6px;cursor:pointer;">Close</button>
+        </div>
+        <div id="floor-info" class="container" style="display:none;">
+            <div class="form-header" id="floor-info-header">
+                <h2>Floor Information</h2>
+                <p id="floor-info-desc">This is a placeholder for the floor information.</p>
             </div>
-            
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="lastName" class="required">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" required placeholder="Required last name">
-                </div>
-                
-                <div class="form-group">
-                    <label for="suffix">Suffix</label>
-                    <select id="suffix" name="suffix">
-                        <option value="">None</option>
-                        <option value="Jr">Jr</option>
-                        <option value="Sr">Sr</option>
-                        <option value="II">II</option>
-                        <option value="III">III</option>
-                        <option value="IV">IV</option>
-                    </select>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="birthdate" class="required">Date of Birth</label>
-                <input type="date" id="birthdate" name="birthdate" required>
-            </div>
-            
-            <button type="submit" class="btn-submit">Search Patient Records</button>
-        </form>
-
-        <div id="results"></div>
+            <button id="close-floor-info" style="margin-top:20px;padding:10px 24px;font-size:1rem;font-weight:600;background:#4a90e2;color:#fff;border:none;border-radius:6px;cursor:pointer;">Close</button>
         </div>
         <div id="patient-modal" class="modal-overlay" style="display:none;">
             <div class="modal-content">
@@ -555,21 +579,56 @@
     </div>
 
     <script>
+        // Toggle About ONI info
+        document.getElementById('about-oni-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('main-dashboard-content').style.display = 'none';
+            document.getElementById('about-oni-info').style.display = 'block';
+        });
+
+        // Close About ONI info
+        document.getElementById('close-about-oni').addEventListener('click', function() {
+            document.getElementById('about-oni-info').style.display = 'none';
+            document.getElementById('main-dashboard-content').style.display = 'block';
+        });
+
+        // Floor Directory logic
+        document.getElementById('floor-directory-select').addEventListener('change', function() {
+            var value = this.value;
+            var header = document.getElementById('floor-info-header').querySelector('h2');
+            var desc = document.getElementById('floor-info-desc');
+            if (value === 'ground') {
+                header.textContent = 'Ground Floor Information';
+                desc.textContent = 'This is a placeholder for the Ground Floor information.';
+            } else if (value === 'first') {
+                header.textContent = '1st Floor Information';
+                desc.textContent = 'This is a placeholder for the 1st Floor information.';
+            } else if (value === 'second') {
+                header.textContent = '2nd Floor Information';
+                desc.textContent = 'This is a placeholder for the 2nd Floor information.';
+            }
+            document.getElementById('main-dashboard-content').style.display = 'none';
+            document.getElementById('about-oni-info').style.display = 'none';
+            document.getElementById('floor-info').style.display = 'block';
+        });
+
+        document.getElementById('close-floor-info').addEventListener('click', function() {
+            document.getElementById('floor-info').style.display = 'none';
+            document.getElementById('main-dashboard-content').style.display = 'block';
+        });
+
+        // Patient search form logic
         document.getElementById('searchForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            
             const submitBtn = document.querySelector('.btn-submit');
             const resultsDiv = document.getElementById('results');
-            
             // Show loading state
             submitBtn.disabled = true;
             submitBtn.textContent = 'Searching...';
             resultsDiv.innerHTML = '<div class="loading">Searching patient records...</div>';
-            
             // Get form data
             const formData = new FormData(this);
             const searchData = Object.fromEntries(formData);
-            
             try {
                 const response = await fetch('/search', {
                     method: 'POST',
@@ -578,9 +637,7 @@
                     },
                     body: JSON.stringify(searchData)
                 });
-                
                 const result = await response.json();
-                
                 if (result.success) {
                     // Show patient record in modal popup
                     let html = '<div class="results-container">';

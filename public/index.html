@@ -127,7 +127,17 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             padding: 30px;
             width: 100%;
-            max-width: 800px;
+            max-width: 700px;
+            margin-top: -440px;
+        }
+        .floor-info-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 40px 48px;
+            width: 100%;
+            max-width: 1100px;
             margin-top: -440px;
         }
         
@@ -502,9 +512,9 @@
                 </div>
                 <select id="floor-directory-select" style="width:100%;padding:10px 16px;font-size:1rem;font-weight:500;border:none;outline:none;background:transparent;cursor:pointer;">
                     <option value="" selected>Select Floor</option>
-                    <option value="ground">Ground Floor</option>
-                    <option value="first">1st Floor</option>
-                    <option value="second">2nd Floor</option>
+                    <option value="ground">GROUND FLOOR</option>
+                    <option value="first">2ND FLOOR</option>
+                    <option value="second">3RD FLOOR</option>
                 </select>
             </div>
         </div>
@@ -564,7 +574,7 @@
             </div>
             <button id="close-about-oni" style="margin-top:20px;padding:10px 24px;font-size:1rem;font-weight:600;background:#4a90e2;color:#fff;border:none;border-radius:6px;cursor:pointer;">Close</button>
         </div>
-        <div id="floor-info" class="container" style="display:none;">
+        <div id="floor-info" class="floor-info-container" style="display:none;">
             <div class="form-header" id="floor-info-header">
                 <h2>Floor Information</h2>
                 <p id="floor-info-desc">This is a placeholder for the floor information.</p>
@@ -599,14 +609,14 @@
             var header = document.getElementById('floor-info-header').querySelector('h2');
             var desc = document.getElementById('floor-info-desc');
             if (value === 'ground') {
-                header.textContent = 'Ground Floor Information';
+                header.innerHTML = '<div style="font-size:2rem;font-weight:800;color:#1a237e;">OSPITAL NG IMUS OFFICE DIRECTORY</div><div style="font-size:1.2rem;font-weight:700;color:#283593;margin-top:6px;">GROUND FLOOR</div>';
                 desc.textContent = 'This is a placeholder for the Ground Floor information.';
             } else if (value === 'first') {
-                header.textContent = '1st Floor Information';
-                desc.textContent = 'This is a placeholder for the 1st Floor information.';
+                header.innerHTML = '<div style="font-size:2rem;font-weight:800;color:#1a237e;">OSPITAL NG IMUS OFFICE DIRECTORY</div><div style="font-size:1.2rem;font-weight:700;color:#283593;margin-top:6px;">SECOND FLOOR</div>';
+                desc.textContent = 'This is a placeholder for the 2ND FLOOR information.';
             } else if (value === 'second') {
-                header.textContent = '2nd Floor Information';
-                desc.textContent = 'This is a placeholder for the 2nd Floor information.';
+                header.innerHTML = '<div style="font-size:2rem;font-weight:800;color:#1a237e;">OSPITAL NG IMUS OFFICE DIRECTORY</div><div style="font-size:1.2rem;font-weight:700;color:#283593;margin-top:6px;">THIRD FLOOR</div>';
+                desc.textContent = 'This is a placeholder for the 3RD FLOOR information.';
             }
             document.getElementById('main-dashboard-content').style.display = 'none';
             document.getElementById('about-oni-info').style.display = 'none';
@@ -676,8 +686,7 @@
                         html += `<div class="id-info-row"><span class="id-label">Patient's ID:</span> <span class="id-value"> ${patientId}</span></div>`;
                         html += `<div class="id-info-row"><span class="id-label">Fullname:</span> <span class="id-value">${fullName}</span></div>`;
                         html += `<div class="id-info-row"><span class="id-label">Birthdate:</span> <span class="id-value">${birthdate}</span></div>`;
-                        html += `<div class="id-info-row"><span class="id-label">Age:</span> <span class="id-value">${age}</span></div>`;
-                        html += `<div class="id-info-row"><span class="id-label">Address:</span> <span class="id-value">${address}</span></div>`;
+                        html += `<div class="id-info-row"><span class="id-label">Age:</span> <span class="id-value">${age}</span></div>`;                        html += `<div class="id-info-row"><span class="id-label">Address:</span> <span class="id-value">${address}</span></div>`;
                         html += `<div class="id-info-row"><span class="id-label">Mobile No.:</span> <span class="id-value">${mobile}</span></div>`;
                         html += `<div class="id-info-row"><span class="id-label">PHIC No.:</span> <span class="id-value">${phic}</span></div>`;
                         html += `<div style="display: flex; justify-content: center; margin: 40px 0 30px 0;">

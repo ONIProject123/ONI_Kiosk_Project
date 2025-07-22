@@ -481,6 +481,44 @@
           padding: 8px;
           box-sizing: border-box;
         }
+        .oni-directory-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 14px 18px;
+          margin-bottom: 0;
+        }
+        .oni-directory-grid > div {
+          background: #fff;
+          border: 2px solid #43a047;
+          border-radius: 6px;
+          padding: 8px 14px;
+          font-size: 1.08rem;
+          font-weight: bold;
+          color: #111;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          min-height: 48px;
+          height: 48px;
+          box-shadow: none;
+          width: 100%;
+          box-sizing: border-box;
+          text-align: left;
+          justify-content: flex-start;
+        }
+        .oni-loc-img {
+          width: 26px;
+          height: 26px;
+          object-fit: contain;
+          margin-right: 10px;
+          display: inline-block;
+          vertical-align: middle;
+        }
+        .oni-label {
+          font-weight: bold;
+          color: #111;
+          letter-spacing: 0.01em;
+        }
     </style>
 </head>
 <body>
@@ -609,14 +647,73 @@
             var header = document.getElementById('floor-info-header').querySelector('h2');
             var desc = document.getElementById('floor-info-desc');
             if (value === 'ground') {
-                header.innerHTML = '<div style="font-size:2rem;font-weight:800;color:#1a237e;">OSPITAL NG IMUS OFFICE DIRECTORY</div><div style="font-size:1.2rem;font-weight:700;color:#283593;margin-top:6px;">GROUND FLOOR</div>';
-                desc.textContent = 'This is a placeholder for the Ground Floor information.';
+                header.innerHTML = '<div style="font-size:2rem;font-weight:800;color:#1a237e;">OSPITAL NG IMUS OFFICE DIRECTORY</div><div style="font-size:1.5rem;font-weight:700;color:#283593;margin-top:8px;">GROUND FLOOR</div>';
+                desc.innerHTML = `
+                  <div class="oni-directory-grid">
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">ADMITTING / INFORMATION</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CHIEF OF MEDICAL PROFESSIONAL STAFF OFFICE</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">OUTPATIENT DEPARTMENT</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">ANIMAL BITE TREATMENT CENTER</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">DIALYSIS CENTER</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">PHARMACY</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BENEFITS SECTION</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">DIETARY</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">RADIOLOGY</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BILLING SECTION</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">EMERGENCY DEPARTMENT</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">RESPIRATORY UNIT</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BREASTFEEDING ROOM</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">HEALTH INFORMATION MANAGEMENT DEPARTMENT</span></div>
+                    <div></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CAFETERIA</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">HEART STATION</span></div>
+                    <div></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CASH OPERATIONS</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">LABORATORY</span></div>
+                    <div></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CHIEF ADMINISTRATIVE OFFICE</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">MEDICAL SOCIAL SERVICES</span></div>
+                    <div></div>
+                  </div>
+                `;
             } else if (value === 'first') {
                 header.innerHTML = '<div style="font-size:2rem;font-weight:800;color:#1a237e;">OSPITAL NG IMUS OFFICE DIRECTORY</div><div style="font-size:1.2rem;font-weight:700;color:#283593;margin-top:6px;">SECOND FLOOR</div>';
-                desc.textContent = 'This is a placeholder for the 2ND FLOOR information.';
+                desc.innerHTML = `
+                  <div class="oni-directory-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">2ND FLOOR NURSE STATION</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">OFFICE OF THE CHIEF NURSE</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">2ND FLOOR WARD ROOMS 201 - 213</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">OPERATING ROOM</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BREASTFEEDING ROOM</span></div>
+                    <div></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CENTRAL SUPPLY ROOM</span></div>
+                    <div></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">INFORMATION TECHNOLOGY DEPARTMENT</span></div>
+                    <div></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">NURSING SERVICE OFFICE</span></div>
+                  </div>
+                `;
             } else if (value === 'second') {
                 header.innerHTML = '<div style="font-size:2rem;font-weight:800;color:#1a237e;">OSPITAL NG IMUS OFFICE DIRECTORY</div><div style="font-size:1.2rem;font-weight:700;color:#283593;margin-top:6px;">THIRD FLOOR</div>';
-                desc.textContent = 'This is a placeholder for the 3RD FLOOR information.';
+                desc.innerHTML = `
+                  <div class="oni-directory-grid" style="grid-template-columns: repeat(2, 1fr);">
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">3RD FLOOR NURSE STATION</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">PROPERTY AND SUPPLY DEPARTMENT</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">3RD FLOOR WARD ROOMS 301 - 320</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">PUBLIC HEALTH UNIT</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">ACCOUNTING</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">QUALITY MANAGEMENT SERVICES</span></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BUDGET</span></div>
+                    <div></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CHIEF OF HOSPITAL OFFICE</span></div>
+                    <div></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">ENGINEERING AND MAINTENANCE</span></div>
+                    <div></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">GENERAL SERVICES OFFICE</span></div>
+                    <div></div>
+                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">HUMAN RESOURCE AND MANAGEMENT OFFICE</span></div>
+                  </div>
+                `;
             }
             document.getElementById('main-dashboard-content').style.display = 'none';
             document.getElementById('about-oni-info').style.display = 'none';

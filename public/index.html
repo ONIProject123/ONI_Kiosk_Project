@@ -924,6 +924,9 @@
                     // Show patient record in modal popup
                     let html = '<div class="results-container">';
                     html += `<h2>Patient Record Found! (${result.count} record(s) found)</h2>`;
+                    // Store patient data for appointment button
+                    let patientDataForAppointment = null;
+                    
                     result.records.forEach(record => {
                         html += '<div class="patient-record-id-header">';
                         html += '<img src="Ph_seal_Imus.png" class="id-logo" alt="Imus Seal">';
@@ -954,6 +957,20 @@
                         const address = record.address || record.Address || '-';
                         const mobile = record.mobile || record.mobile_no || record["Mobile No."] || '-';
                         const phic = record.phic || record.phic_no || record["PhilHealth No."] || '-';
+                        
+                        // Store patient data for the first record (assuming single patient display)
+                        if (!patientDataForAppointment) {
+                            patientDataForAppointment = {
+                                patientId: patientId,
+                                fullName: fullName,
+                                birthdate: birthdate,
+                                age: age,
+                                address: address,
+                                mobile: mobile,
+                                phic: phic
+                            };
+                        }
+                        
                         html += `<div class="id-info-row"><span class="id-label">Patient's ID:</span> <span class="id-value"> ${patientId}</span></div>`;
                         html += `<div class="id-info-row"><span class="id-label">Fullname:</span> <span class="id-value">${fullName}</span></div>`;
                         html += `<div class="id-info-row"><span class="id-label">Birthdate:</span> <span class="id-value">${birthdate}</span></div>`;
@@ -961,7 +978,7 @@
                         html += `<div class="id-info-row"><span class="id-label">Mobile No.:</span> <span class="id-value">${mobile}</span></div>`;
                         html += `<div class="id-info-row"><span class="id-label">PHIC No.:</span> <span class="id-value">${phic}</span></div>`;
                         html += `<div style="display: flex; justify-content: center; margin: 40px 0 30px 0;">
-  <button id="set-appointment-btn" class="btn-submit" style="width: 260px; height: 56px; font-size: 1.3rem; font-weight: bold;">Set Appointment</button>
+  <button id="set-appointment-btn" class="btn-submit" style="width: 260px; height: 50px; font-size: 1.3rem; font-weight: bold;">Set Appointment</button>
 </div>`;
                         html += '</div>';
                         html += '</div>';
@@ -972,9 +989,11 @@
                     // Add event listener for Set Appointment button
                     setTimeout(function() {
                         var setApptBtn = document.getElementById('set-appointment-btn');
-                        if (setApptBtn) {
+                        if (setApptBtn && patientDataForAppointment) {
                             setApptBtn.onclick = function() {
-                                window.location.href = 'appointment.html';
+                                // Pass patient information to appointment page
+                                const params = new URLSearchParams(patientDataForAppointment);
+                                window.location.href = `appointment.html?${params.toString()}`;
                             };
                         }
                     }, 100);

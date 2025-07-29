@@ -127,7 +127,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             padding: 30px;
             width: 100%;
-            max-width: 700px;
+            max-width: 800px;
             margin-top: -440px;
         }
         .floor-info-container {
@@ -345,7 +345,7 @@
             border-radius: 18px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.18);
             padding: 0;
-            max-width: 900px;
+            max-width: 1200px;
             min-width: 750px;
             width: 95vw;
             position: relative;
@@ -360,8 +360,8 @@
             padding: 20px 30px 12px 30px;
         }
         .id-logo {
-            width: 70px;
-            height: 70px;
+            width: 100px;
+            height: 100px;
             object-fit: contain;
             background: #fff;
             border-radius: 50%;
@@ -402,8 +402,8 @@
             justify-content: center;
         }
         .id-photo-placeholder {
-            width: 160px;
-            height: 160px;
+            width: 200px;
+            height: 200px;
             background: #e2e8f0;
             border-radius: 12px;
             display: flex;
@@ -492,7 +492,7 @@
           border: 2px solid #43a047;
           border-radius: 6px;
           padding: 8px 14px;
-          font-size: 1.08rem;
+          font-size: 0.95rem;
           font-weight: bold;
           color: #111;
           display: flex;
@@ -505,6 +505,127 @@
           box-sizing: border-box;
           text-align: left;
           justify-content: flex-start;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        
+        .oni-directory-grid > div:hover {
+          background: #f0f8f0;
+          border-color: #2e7d32;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 8px rgba(67, 160, 71, 0.2);
+        }
+        
+        .oni-directory-grid > div:active {
+          transform: translateY(0);
+        }
+        
+        .map-popup-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.7);
+          display: none;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+        }
+        
+        .map-popup-container {
+          background: #fff;
+          border-radius: 12px;
+          padding: 30px;
+          max-width: 500px;
+          width: 90%;
+          text-align: center;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+          position: relative;
+          animation: popupSlideIn 0.3s ease-out;
+        }
+        
+        @keyframes popupSlideIn {
+          from {
+            opacity: 0;
+            transform: scale(0.8) translateY(-20px);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+        }
+        
+        .map-popup-header {
+          margin-bottom: 20px;
+        }
+        
+        .map-popup-title {
+          font-size: 1.4rem;
+          font-weight: bold;
+          color: #1a237e;
+          margin-bottom: 5px;
+        }
+        
+        .map-popup-subtitle {
+          font-size: 1rem;
+          color: #666;
+        }
+        
+        .map-popup-content {
+          margin-bottom: 25px;
+        }
+        
+        .map-icon {
+          font-size: 5rem;
+          color: #43a047;
+          margin-bottom: 15px;
+        }
+        
+        .map-placeholder {
+          font-size: 1.1rem;
+          color: #666;
+          margin-bottom: 15px;
+        }
+        
+        .map-popup-close {
+          position: absolute;
+          top: 15px;
+          right: 20px;
+          background: none;
+          border: none;
+          font-size: 1.5rem;
+          color: #999;
+          cursor: pointer;
+          padding: 5px;
+          border-radius: 50%;
+          width: 35px;
+          height: 35px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s ease;
+        }
+        
+        .map-popup-close:hover {
+          background: #f0f0f0;
+          color: #666;
+        }
+        
+        .map-popup-button {
+          background: #43a047;
+          color: white;
+          border: none;
+          padding: 12px 24px;
+          border-radius: 6px;
+          font-size: 1rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background-color 0.2s ease;
+        }
+        
+        .map-popup-button:hover {
+          background: #2e7d32;
         }
         .oni-loc-img {
           width: 26px;
@@ -619,6 +740,23 @@
             </div>
             <button id="close-floor-info" style="margin-top:20px;padding:10px 24px;font-size:1rem;font-weight:600;background:#4a90e2;color:#fff;border:none;border-radius:6px;cursor:pointer;">Close</button>
         </div>
+        
+        <!-- Map Popup Modal -->
+        <div id="map-popup-overlay" class="map-popup-overlay">
+            <div class="map-popup-container">
+                <button id="map-popup-close" class="map-popup-close">&times;</button>
+                <div class="map-popup-header">
+                    <div class="map-popup-title" id="map-popup-title">Location Map</div>
+                    <div class="map-popup-subtitle">Ospital ng Imus</div>
+                </div>
+                <div class="map-popup-content">
+                    <div class="map-icon">🗺️</div>
+                    <div class="map-placeholder">Map placeholder for the selected location</div>
+                    <p style="color:#666;font-size:0.9rem;margin-bottom:20px;">This is where the actual map will be displayed</p>
+                    <button class="map-popup-button">View Full Map</button>
+                </div>
+            </div>
+        </div>
         <div id="patient-modal" class="modal-overlay" style="display:none;">
             <div class="modal-content">
                 <button id="close-modal" class="close-modal-btn">&larr; Back</button>
@@ -650,29 +788,29 @@
                 header.innerHTML = '<div style="font-size:2rem;font-weight:800;color:#1a237e;">OSPITAL NG IMUS OFFICE DIRECTORY</div><div style="font-size:1.5rem;font-weight:700;color:#283593;margin-top:8px;">GROUND FLOOR</div>';
                 desc.innerHTML = `
                   <div class="oni-directory-grid">
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">ADMITTING / INFORMATION</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CHIEF OF MEDICAL PROFESSIONAL STAFF OFFICE</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">OUTPATIENT DEPARTMENT</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">ANIMAL BITE TREATMENT CENTER</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">DIALYSIS CENTER</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">PHARMACY</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BENEFITS SECTION</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">DIETARY</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">RADIOLOGY</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BILLING SECTION</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">EMERGENCY DEPARTMENT</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">RESPIRATORY UNIT</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BREASTFEEDING ROOM</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">HEALTH INFORMATION MANAGEMENT DEPARTMENT</span></div>
+                    <div data-location="ADMITTING / INFORMATION"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">ADMITTING / INFORMATION</span></div>
+                    <div data-location="CHIEF OF MEDICAL PROFESSIONAL STAFF OFFICE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CHIEF OF MEDICAL PROFESSIONAL STAFF OFFICE</span></div>
+                    <div data-location="OUTPATIENT DEPARTMENT"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">OUTPATIENT DEPARTMENT</span></div>
+                    <div data-location="ANIMAL BITE TREATMENT CENTER"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">ANIMAL BITE TREATMENT CENTER</span></div>
+                    <div data-location="DIALYSIS CENTER"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">DIALYSIS CENTER</span></div>
+                    <div data-location="PHARMACY"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">PHARMACY</span></div>
+                    <div data-location="BENEFITS SECTION"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BENEFITS SECTION</span></div>
+                    <div data-location="DIETARY"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">DIETARY</span></div>
+                    <div data-location="RADIOLOGY"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">RADIOLOGY</span></div>
+                    <div data-location="BILLING SECTION"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BILLING SECTION</span></div>
+                    <div data-location="EMERGENCY DEPARTMENT"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">EMERGENCY DEPARTMENT</span></div>
+                    <div data-location="RESPIRATORY UNIT"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">RESPIRATORY UNIT</span></div>
+                    <div data-location="BREASTFEEDING ROOM"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BREASTFEEDING ROOM</span></div>
+                    <div data-location="HEALTH INFORMATION MANAGEMENT DEPARTMENT"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">HEALTH INFORMATION MANAGEMENT DEPARTMENT</span></div>
                     <div></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CAFETERIA</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">HEART STATION</span></div>
+                    <div data-location="CAFETERIA"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CAFETERIA</span></div>
+                    <div data-location="HEART STATION"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">HEART STATION</span></div>
                     <div></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CASH OPERATIONS</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">LABORATORY</span></div>
+                    <div data-location="CASH OPERATIONS"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CASH OPERATIONS</span></div>
+                    <div data-location="LABORATORY"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">LABORATORY</span></div>
                     <div></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CHIEF ADMINISTRATIVE OFFICE</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">MEDICAL SOCIAL SERVICES</span></div>
+                    <div data-location="CHIEF ADMINISTRATIVE OFFICE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CHIEF ADMINISTRATIVE OFFICE</span></div>
+                    <div data-location="MEDICAL SOCIAL SERVICES"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">MEDICAL SOCIAL SERVICES</span></div>
                     <div></div>
                   </div>
                 `;
@@ -680,44 +818,80 @@
                 header.innerHTML = '<div style="font-size:2rem;font-weight:800;color:#1a237e;">OSPITAL NG IMUS OFFICE DIRECTORY</div><div style="font-size:1.2rem;font-weight:700;color:#283593;margin-top:6px;">SECOND FLOOR</div>';
                 desc.innerHTML = `
                   <div class="oni-directory-grid" style="grid-template-columns: repeat(2, 1fr);">
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">2ND FLOOR NURSE STATION</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">OFFICE OF THE CHIEF NURSE</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">2ND FLOOR WARD ROOMS 201 - 213</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">OPERATING ROOM</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BREASTFEEDING ROOM</span></div>
+                    <div data-location="2ND FLOOR NURSE STATION"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">2ND FLOOR NURSE STATION</span></div>
+                    <div data-location="OFFICE OF THE CHIEF NURSE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">OFFICE OF THE CHIEF NURSE</span></div>
+                    <div data-location="2ND FLOOR WARD ROOMS 201 - 213"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">2ND FLOOR WARD ROOMS 201 - 213</span></div>
+                    <div data-location="OPERATING ROOM"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">OPERATING ROOM</span></div>
+                    <div data-location="BREASTFEEDING ROOM"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BREASTFEEDING ROOM</span></div>
                     <div></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CENTRAL SUPPLY ROOM</span></div>
+                    <div data-location="CENTRAL SUPPLY ROOM"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CENTRAL SUPPLY ROOM</span></div>
                     <div></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">INFORMATION TECHNOLOGY DEPARTMENT</span></div>
+                    <div data-location="INFORMATION TECHNOLOGY DEPARTMENT"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">INFORMATION TECHNOLOGY DEPARTMENT</span></div>
                     <div></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">NURSING SERVICE OFFICE</span></div>
+                    <div data-location="NURSING SERVICE OFFICE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">NURSING SERVICE OFFICE</span></div>
                   </div>
                 `;
             } else if (value === 'second') {
                 header.innerHTML = '<div style="font-size:2rem;font-weight:800;color:#1a237e;">OSPITAL NG IMUS OFFICE DIRECTORY</div><div style="font-size:1.2rem;font-weight:700;color:#283593;margin-top:6px;">THIRD FLOOR</div>';
                 desc.innerHTML = `
                   <div class="oni-directory-grid" style="grid-template-columns: repeat(2, 1fr);">
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">3RD FLOOR NURSE STATION</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">PROPERTY AND SUPPLY DEPARTMENT</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">3RD FLOOR WARD ROOMS 301 - 320</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">PUBLIC HEALTH UNIT</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">ACCOUNTING</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">QUALITY MANAGEMENT SERVICES</span></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BUDGET</span></div>
+                    <div data-location="3RD FLOOR NURSE STATION"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">3RD FLOOR NURSE STATION</span></div>
+                    <div data-location="PROPERTY AND SUPPLY DEPARTMENT"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">PROPERTY AND SUPPLY DEPARTMENT</span></div>
+                    <div data-location="3RD FLOOR WARD ROOMS 301 - 320"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">3RD FLOOR WARD ROOMS 301 - 320</span></div>
+                    <div data-location="PUBLIC HEALTH UNIT"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">PUBLIC HEALTH UNIT</span></div>
+                    <div data-location="ACCOUNTING"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">ACCOUNTING</span></div>
+                    <div data-location="QUALITY MANAGEMENT SERVICES"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">QUALITY MANAGEMENT SERVICES</span></div>
+                    <div data-location="BUDGET"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BUDGET</span></div>
                     <div></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CHIEF OF HOSPITAL OFFICE</span></div>
+                    <div data-location="CHIEF OF HOSPITAL OFFICE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CHIEF OF HOSPITAL OFFICE</span></div>
                     <div></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">ENGINEERING AND MAINTENANCE</span></div>
+                    <div data-location="ENGINEERING AND MAINTENANCE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">ENGINEERING AND MAINTENANCE</span></div>
                     <div></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">GENERAL SERVICES OFFICE</span></div>
+                    <div data-location="GENERAL SERVICES OFFICE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">GENERAL SERVICES OFFICE</span></div>
                     <div></div>
-                    <div><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">HUMAN RESOURCE AND MANAGEMENT OFFICE</span></div>
+                    <div data-location="HUMAN RESOURCE AND MANAGEMENT OFFICE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">HUMAN RESOURCE AND MANAGEMENT OFFICE</span></div>
                   </div>
                 `;
             }
             document.getElementById('main-dashboard-content').style.display = 'none';
             document.getElementById('about-oni-info').style.display = 'none';
             document.getElementById('floor-info').style.display = 'block';
+            
+            // Add click event listeners to directory items
+            setTimeout(function() {
+                const directoryItems = document.querySelectorAll('.oni-directory-grid > div[data-location]');
+                directoryItems.forEach(function(item) {
+                    item.addEventListener('click', function() {
+                        const locationName = this.getAttribute('data-location');
+                        showMap(locationName);
+                    });
+                });
+            }, 100);
+        });
+        
+        // Function to show map popup for selected location
+        function showMap(locationName) {
+            document.getElementById('map-popup-title').textContent = locationName;
+            document.getElementById('map-popup-overlay').style.display = 'flex';
+        }
+        
+        // Close map popup when clicking the close button
+        document.getElementById('map-popup-close').addEventListener('click', function() {
+            document.getElementById('map-popup-overlay').style.display = 'none';
+        });
+        
+        // Close map popup when clicking outside the popup
+        document.getElementById('map-popup-overlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.style.display = 'none';
+            }
+        });
+        
+        // Close map popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.getElementById('map-popup-overlay').style.display = 'none';
+            }
         });
 
         document.getElementById('close-floor-info').addEventListener('click', function() {

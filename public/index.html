@@ -825,12 +825,9 @@
                 desc.innerHTML = `
                   <div class="oni-directory-grid" style="grid-template-columns: repeat(2, 1fr);">
                     <div data-location="2ND FLOOR NURSE STATION"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">2ND FLOOR NURSE STATION</span></div>
-                    <div data-location="OFFICE OF THE CHIEF NURSE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">OFFICE OF THE CHIEF NURSE</span></div>
                     <div data-location="2ND FLOOR WARD ROOMS 201 - 213"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">2ND FLOOR WARD ROOMS 201 - 213</span></div>
                     <div data-location="OPERATING ROOM"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">OPERATING ROOM</span></div>
-                    <div data-location="BREASTFEEDING ROOM"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BREASTFEEDING ROOM</span></div>
                     <div data-location="INFORMATION TECHNOLOGY DEPARTMENT"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">INFORMATION TECHNOLOGY DEPARTMENT</span></div>
-                    <div data-location="NURSING SERVICE OFFICE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">NURSING SERVICE OFFICE</span></div>
                   </div>
                 `;
             } else if (value === 'second') {
@@ -1016,6 +1013,47 @@
                 mapPlaceholder.textContent = 'Ground Floor - Training Room';
                 mapDescription.textContent = 'This room is used for staff training sessions, meetings, and educational programs.';
                 // Add large class for bigger popup
+                mapContainer.classList.add('large');
+            } else if (locationName === '2ND FLOOR NURSE STATION') {
+                mapIcon.innerHTML = '<img src="Nurse station 2nd floor.png" alt="2nd Floor Nurse Station Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
+                mapPlaceholder.textContent = '2nd Floor - Nurse Station';
+                mapDescription.textContent = 'This is the main nurse station for the 2nd floor, providing care and assistance to patients in the ward rooms.';
+                mapContainer.classList.add('large');
+            } else if (locationName === '2ND FLOOR WARD ROOMS 201 - 213') {
+                mapIcon.innerHTML = '<img src="WARD ROOMS 2nd floor.png" alt="2nd Floor Ward Rooms Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
+                mapPlaceholder.textContent = '2nd Floor - Ward Rooms 201 - 213';
+                mapDescription.textContent = 'These are the patient ward rooms located on the 2nd floor, rooms 201 to 213.';
+                mapContainer.classList.add('large');
+            } else if (locationName === 'BREASTFEEDING ROOM') {
+                mapIcon.innerHTML = '<img src="BREAST FEEDING ROOM.png" alt="Breastfeeding Room Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
+                mapPlaceholder.textContent = 'Ground Floor - Breastfeeding Room';
+                mapDescription.textContent = 'This private room provides a comfortable and hygienic space for mothers to breastfeed their infants.';
+                // Add large class for bigger popup
+                mapContainer.classList.add('large');
+            } else if (locationName === 'OPERATING ROOM') {
+                mapIcon.innerHTML = '<img src="OR.png" alt="Operating Room Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
+                mapPlaceholder.textContent = '2nd Floor - Operating Room';
+                mapDescription.textContent = 'The main operating room for surgical procedures on the 2nd floor.';
+                mapContainer.classList.add('large');
+            } else if (locationName === 'INFORMATION TECHNOLOGY DEPARTMENT') {
+                mapIcon.innerHTML = '<img src="IT.png" alt="Information Technology Department Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
+                mapPlaceholder.textContent = '2nd Floor - Information Technology Department';
+                mapDescription.textContent = 'The IT department responsible for managing hospital information systems and technology.';
+                mapContainer.classList.add('large');
+            } else if (locationName === 'BREASTFEEDING ROOM 2nd floor') {
+                mapIcon.innerHTML = '<img src="BREAST FEEDING ROOM.png" alt="Breastfeeding Room 2nd Floor Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
+                mapPlaceholder.textContent = '2nd Floor - Breastfeeding Room';
+                mapDescription.textContent = 'A private room on the 2nd floor for mothers to breastfeed their infants in comfort and privacy.';
+                mapContainer.classList.add('large');
+            } else if (locationName === '3RD FLOOR NURSE STATION') {
+                mapIcon.innerHTML = '<img src="Nursing station 3rd floor.png" alt="3rd Floor Nurse Station Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
+                mapPlaceholder.textContent = '3rd Floor - Nurse Station';
+                mapDescription.textContent = 'This is the main nurse station for the 3rd floor, providing care and assistance to patients in the ward rooms.';
+                mapContainer.classList.add('large');
+            } else if (locationName === '3RD FLOOR WARD ROOMS 301 - 320') {
+                mapIcon.innerHTML = '<img src="WARD ROOMS 3rd floor.png" alt="3rd Floor Ward Rooms Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
+                mapPlaceholder.textContent = '3rd Floor - Ward Rooms 301 - 320';
+                mapDescription.textContent = 'These are the patient ward rooms located on the 3rd floor, rooms 301 to 320.';
                 mapContainer.classList.add('large');
             } else {
                 // Reset to default for other locations

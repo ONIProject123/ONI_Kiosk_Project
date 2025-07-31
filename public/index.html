@@ -545,6 +545,12 @@
           animation: popupSlideIn 0.3s ease-out;
         }
         
+        .map-popup-container.large {
+          max-width: 700px;
+          width: 95%;
+          padding: 40px;
+        }
+        
         @keyframes popupSlideIn {
           from {
             opacity: 0;
@@ -809,7 +815,7 @@
                     <div data-location="CASH OPERATIONS"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CASH OPERATIONS</span></div>
                     <div data-location="LABORATORY"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">LABORATORY</span></div>
                     <div></div>
-                    <div data-location="CHIEF ADMINISTRATIVE OFFICE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CHIEF ADMINISTRATIVE OFFICE</span></div>
+                    <div data-location="CHIEF OF ADMINISTRATIVE OFFICE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CHIEF ADMINISTRATIVE OFFICE</span></div>
                     <div data-location="MEDICAL SOCIAL SERVICES"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">MEDICAL SOCIAL SERVICES</span></div>
                     <div></div>
                   </div>
@@ -872,6 +878,34 @@
         // Function to show map popup for selected location
         function showMap(locationName) {
             document.getElementById('map-popup-title').textContent = locationName;
+            
+            // Get the map popup content elements
+            const mapIcon = document.querySelector('.map-icon');
+            const mapPlaceholder = document.querySelector('.map-placeholder');
+            const mapDescription = document.querySelector('.map-popup-content p');
+            const viewButton = document.querySelector('.map-popup-button');
+            const mapContainer = document.querySelector('.map-popup-container');
+            
+            // Check if it's the ADMITTING / INFORMATION location
+            if (locationName === 'ADMITTING / INFORMATION') {
+                // Replace the map icon with the Admitting.png image
+                mapIcon.innerHTML = '<img src="Admitting.png" alt="Admitting/Information Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
+                mapPlaceholder.textContent = 'Ground Floor - Admitting/Information Area';
+                mapDescription.textContent = 'This area serves as the main admitting and information desk for patients and visitors.';
+                // Add large class for bigger popup
+                mapContainer.classList.add('large');
+            } else {
+                // Reset to default for other locations
+                mapIcon.innerHTML = '🗺️';
+                mapPlaceholder.textContent = 'Map placeholder for the selected location';
+                mapDescription.textContent = 'This is where the actual map will be displayed';
+                // Remove large class for normal size
+                mapContainer.classList.remove('large');
+            }
+            
+            // Hide the view button for all locations
+            viewButton.style.display = 'none';
+            
             document.getElementById('map-popup-overlay').style.display = 'flex';
         }
         

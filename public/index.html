@@ -534,10 +534,10 @@
         }
         
         .map-popup-container {
-          background: #fff;
-          border-radius: 12px;
+          background: #ffffff;
+          border-radius: 25px;
           padding: 30px;
-          max-width: 500px;
+          max-width: 1000px;
           width: 90%;
           text-align: center;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -548,7 +548,7 @@
         .map-popup-container.large {
           max-width: 700px;
           width: 95%;
-          padding: 40px;
+          padding: 10px;
         }
         
         @keyframes popupSlideIn {
@@ -563,7 +563,7 @@
         }
         
         .map-popup-header {
-          margin-bottom: 20px;
+          margin-bottom: 10px;
         }
         
         .map-popup-title {
@@ -579,7 +579,7 @@
         }
         
         .map-popup-content {
-          margin-bottom: 25px;
+          margin-bottom: 5px;
         }
         
         .map-icon {
@@ -829,11 +829,7 @@
                     <div data-location="2ND FLOOR WARD ROOMS 201 - 213"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">2ND FLOOR WARD ROOMS 201 - 213</span></div>
                     <div data-location="OPERATING ROOM"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">OPERATING ROOM</span></div>
                     <div data-location="BREASTFEEDING ROOM"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BREASTFEEDING ROOM</span></div>
-                    <div></div>
-                    <div data-location="CENTRAL SUPPLY ROOM"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CENTRAL SUPPLY ROOM</span></div>
-                    <div></div>
                     <div data-location="INFORMATION TECHNOLOGY DEPARTMENT"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">INFORMATION TECHNOLOGY DEPARTMENT</span></div>
-                    <div></div>
                     <div data-location="NURSING SERVICE OFFICE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">NURSING SERVICE OFFICE</span></div>
                   </div>
                 `;
@@ -842,20 +838,7 @@
                 desc.innerHTML = `
                   <div class="oni-directory-grid" style="grid-template-columns: repeat(2, 1fr);">
                     <div data-location="3RD FLOOR NURSE STATION"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">3RD FLOOR NURSE STATION</span></div>
-                    <div data-location="PROPERTY AND SUPPLY DEPARTMENT"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">PROPERTY AND SUPPLY DEPARTMENT</span></div>
                     <div data-location="3RD FLOOR WARD ROOMS 301 - 320"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">3RD FLOOR WARD ROOMS 301 - 320</span></div>
-                    <div data-location="PUBLIC HEALTH UNIT"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">PUBLIC HEALTH UNIT</span></div>
-                    <div data-location="ACCOUNTING"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">ACCOUNTING</span></div>
-                    <div data-location="QUALITY MANAGEMENT SERVICES"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">QUALITY MANAGEMENT SERVICES</span></div>
-                    <div data-location="BUDGET"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BUDGET</span></div>
-                    <div></div>
-                    <div data-location="CHIEF OF HOSPITAL OFFICE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CHIEF OF HOSPITAL OFFICE</span></div>
-                    <div></div>
-                    <div data-location="ENGINEERING AND MAINTENANCE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">ENGINEERING AND MAINTENANCE</span></div>
-                    <div></div>
-                    <div data-location="GENERAL SERVICES OFFICE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">GENERAL SERVICES OFFICE</span></div>
-                    <div></div>
-                    <div data-location="HUMAN RESOURCE AND MANAGEMENT OFFICE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">HUMAN RESOURCE AND MANAGEMENT OFFICE</span></div>
                   </div>
                 `;
             }
@@ -929,10 +912,10 @@
                 mapDescription.textContent = 'This section handles cash transactions, payments, and financial operations for hospital services.';
                 // Add large class for bigger popup
                 mapContainer.classList.add('large');
-            } else if (locationName === 'CHIEF OF ADMINISTRATIVE OFFICE') {
+            } else if (locationName === 'OFFICE OF THE CHIEF ADMINISTRATIVE OFFICE') {
                 // Replace the map icon with the COA.png image
-                mapIcon.innerHTML = '<img src="COA.png" alt="Chief of Administrative Office Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
-                mapPlaceholder.textContent = 'Ground Floor - Chief of Administrative Office';
+                mapIcon.innerHTML = '<img src="COA.png" alt="Office of the Chief Administrative Office Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
+                mapPlaceholder.textContent = 'Ground Floor - Office of the Chief Administrative Office';
                 mapDescription.textContent = 'This is the office of the Chief Administrative Officer, handling administrative and management functions.';
                 // Add large class for bigger popup
                 mapContainer.classList.add('large');
@@ -992,6 +975,13 @@
                 mapDescription.textContent = 'This department manages patient health records, medical documentation, and health information systems.';
                 // Add large class for bigger popup
                 mapContainer.classList.add('large');
+            } else if (locationName === 'MEDICAL RECORDS OFFICE') {
+                // Replace the map icon with the MEDICAL RECORDS.png image
+                mapIcon.innerHTML = '<img src="MEDICAL RECORDS.png" alt="Medical Records Office Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
+                mapPlaceholder.textContent = 'Ground Floor - Medical Records Office';
+                mapDescription.textContent = 'This office manages patient health records, medical documentation, and health information systems.';
+                // Add large class for bigger popup
+                mapContainer.classList.add('large');
             } else if (locationName === 'OUTPATIENT DEPARTMENT') {
                 // Replace the map icon with the OPD.png image
                 mapIcon.innerHTML = '<img src="OPD.png" alt="Outpatient Department Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
@@ -1018,6 +1008,13 @@
                 mapIcon.innerHTML = '<img src="RES UNIT.png" alt="Respiratory Unit Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
                 mapPlaceholder.textContent = 'Ground Floor - Respiratory Unit';
                 mapDescription.textContent = 'This unit provides respiratory care services, including breathing treatments and respiratory therapy.';
+                // Add large class for bigger popup
+                mapContainer.classList.add('large');
+            } else if (locationName === 'TRAINING ROOM') {
+                // Replace the map icon with the Training Room.png image
+                mapIcon.innerHTML = '<img src="Training Room.png" alt="Training Room Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
+                mapPlaceholder.textContent = 'Ground Floor - Training Room';
+                mapDescription.textContent = 'This room is used for staff training sessions, meetings, and educational programs.';
                 // Add large class for bigger popup
                 mapContainer.classList.add('large');
             } else {

@@ -795,7 +795,7 @@
                 desc.innerHTML = `
                   <div class="oni-directory-grid">
                     <div data-location="ADMITTING / INFORMATION"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">ADMITTING / INFORMATION</span></div>
-                    <div data-location="CHIEF OF MEDICAL PROFESSIONAL STAFF OFFICE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CHIEF OF MEDICAL PROFESSIONAL STAFF OFFICE</span></div>
+                    <div data-location="MEDICAL RECORDS OFFICE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">MEDICAL RECORDS OFFICE</span></div>
                     <div data-location="OUTPATIENT DEPARTMENT"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">OUTPATIENT DEPARTMENT</span></div>
                     <div data-location="ANIMAL BITE TREATMENT CENTER"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">ANIMAL BITE TREATMENT CENTER</span></div>
                     <div data-location="DIALYSIS CENTER"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">DIALYSIS CENTER</span></div>
@@ -808,16 +808,16 @@
                     <div data-location="RESPIRATORY UNIT"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">RESPIRATORY UNIT</span></div>
                     <div data-location="BREASTFEEDING ROOM"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">BREASTFEEDING ROOM</span></div>
                     <div data-location="HEALTH INFORMATION MANAGEMENT DEPARTMENT"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">HEALTH INFORMATION MANAGEMENT DEPARTMENT</span></div>
-                    <div></div>
+                    <div data-location="TRAINING ROOM"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">TRAINING ROOM</span></div>
                     <div data-location="CAFETERIA"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CAFETERIA</span></div>
                     <div data-location="HEART STATION"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">HEART STATION</span></div>
                     <div></div>
                     <div data-location="CASH OPERATIONS"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CASH OPERATIONS</span></div>
                     <div data-location="LABORATORY"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">LABORATORY</span></div>
                     <div></div>
-                    <div data-location="CHIEF OF ADMINISTRATIVE OFFICE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">CHIEF ADMINISTRATIVE OFFICE</span></div>
+                    <div data-location="OFFICE OF THE CHIEF ADMINISTRATIVE OFFICE"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">OFFICE OF THE CHIEF ADMINISTRATIVE OFFICE</span></div>
                     <div data-location="MEDICAL SOCIAL SERVICES"><img src="location icon.png" class="oni-loc-img" alt="pin"/> <span class="oni-label">MEDICAL SOCIAL SERVICES</span></div>
-                    <div></div>
+                    
                   </div>
                 `;
             } else if (value === 'first') {
@@ -976,6 +976,48 @@
                 mapIcon.innerHTML = '<img src="MSS.png" alt="Medical Social Services Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
                 mapPlaceholder.textContent = 'Ground Floor - Medical Social Services';
                 mapDescription.textContent = 'This department provides social work services, patient advocacy, and support for patients and families.';
+                // Add large class for bigger popup
+                mapContainer.classList.add('large');
+            } else if (locationName === 'CHIEF OF MEDICAL PROFESSIONAL STAFF OFFICE') {
+                // Replace the map icon with the CMP.png image
+                mapIcon.innerHTML = '<img src="CMP.png" alt="Chief of Medical Professional Staff Office Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
+                mapPlaceholder.textContent = 'Ground Floor - Chief of Medical Professional Staff Office';
+                mapDescription.textContent = 'This office oversees medical professional staff and ensures quality medical care standards.';
+                // Add large class for bigger popup
+                mapContainer.classList.add('large');
+            } else if (locationName === 'HEALTH INFORMATION MANAGEMENT DEPARTMENT') {
+                // Replace the map icon with the MEDICAL RECORDS.png image
+                mapIcon.innerHTML = '<img src="MEDICAL RECORDS.png" alt="Health Information Management Department Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
+                mapPlaceholder.textContent = 'Ground Floor - Health Information Management Department';
+                mapDescription.textContent = 'This department manages patient health records, medical documentation, and health information systems.';
+                // Add large class for bigger popup
+                mapContainer.classList.add('large');
+            } else if (locationName === 'OUTPATIENT DEPARTMENT') {
+                // Replace the map icon with the OPD.png image
+                mapIcon.innerHTML = '<img src="OPD.png" alt="Outpatient Department Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
+                mapPlaceholder.textContent = 'Ground Floor - Outpatient Department';
+                mapDescription.textContent = 'This department provides outpatient medical services and consultations for non-emergency patients.';
+                // Add large class for bigger popup
+                mapContainer.classList.add('large');
+            } else if (locationName === 'PHARMACY') {
+                // Replace the map icon with the PHARMACY.png image
+                mapIcon.innerHTML = '<img src="PHARMACY.png" alt="Pharmacy Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
+                mapPlaceholder.textContent = 'Ground Floor - Pharmacy';
+                mapDescription.textContent = 'This pharmacy dispenses medications and provides pharmaceutical services to patients and staff.';
+                // Add large class for bigger popup
+                mapContainer.classList.add('large');
+            } else if (locationName === 'RADIOLOGY') {
+                // Replace the map icon with the RADIO.png image
+                mapIcon.innerHTML = '<img src="RADIO.png" alt="Radiology Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
+                mapPlaceholder.textContent = 'Ground Floor - Radiology';
+                mapDescription.textContent = 'This department provides diagnostic imaging services including X-rays, CT scans, and ultrasound examinations.';
+                // Add large class for bigger popup
+                mapContainer.classList.add('large');
+            } else if (locationName === 'RESPIRATORY UNIT') {
+                // Replace the map icon with the RES UNIT.png image
+                mapIcon.innerHTML = '<img src="RES UNIT.png" alt="Respiratory Unit Map" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">';
+                mapPlaceholder.textContent = 'Ground Floor - Respiratory Unit';
+                mapDescription.textContent = 'This unit provides respiratory care services, including breathing treatments and respiratory therapy.';
                 // Add large class for bigger popup
                 mapContainer.classList.add('large');
             } else {

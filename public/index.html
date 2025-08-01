@@ -679,7 +679,7 @@
             height: 100%;
             object-fit: cover;
             opacity: 0;
-            transition: opacity 1.5s ease-in-out;
+            transition: opacity 1.2s ease-in-out;
         }
         
         .slideshow-image.active {
@@ -726,19 +726,6 @@
     </style>
 </head>
 <body>
-    <!-- Slideshow Overlay -->
-    <div id="slideshow-overlay" class="slideshow-overlay">
-        <div class="slideshow-container">
-            <div class="slideshow-instruction">Click anywhere to return to dashboard</div>
-            <img src="oni pic.jpg" alt="Ospital ng Imus" class="slideshow-image" id="slide1">
-            <img src="oni pic 2.jpg" alt="Ospital ng Imus" class="slideshow-image" id="slide2">
-            <div class="slideshow-indicator">
-                <div class="indicator-dot active" data-slide="0"></div>
-                <div class="indicator-dot" data-slide="1"></div>
-            </div>
-        </div>
-    </div>
-    
     <header class="main-header">
         <div class="header-content">
             <div class="header-left">
@@ -857,6 +844,23 @@
             <div class="modal-content">
                 <button id="close-modal" class="close-modal-btn">&larr; Back</button>
                 <div id="modal-record"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slideshow Overlay -->
+    <div id="slideshow-overlay" class="slideshow-overlay">
+        <div class="slideshow-container">
+            <div class="slideshow-instruction">Click anywhere to return to dashboard</div>
+            <img src="oni garden.jpg" alt="Ospital ng Imus Garden" class="slideshow-image" id="slide1">
+            <img src="oni main pic.jpg" alt="Ospital ng Imus Main" class="slideshow-image" id="slide2">
+            <img src="oni pic 2.jpg" alt="Ospital ng Imus 2" class="slideshow-image" id="slide3">
+            <img src="oni pic.jpg" alt="Ospital ng Imus" class="slideshow-image" id="slide4">
+            <div class="slideshow-indicator">
+                <div class="indicator-dot active" data-slide="0"></div>
+                <div class="indicator-dot" data-slide="1"></div>
+                <div class="indicator-dot" data-slide="2"></div>
+                <div class="indicator-dot" data-slide="3"></div>
             </div>
         </div>
     </div>
@@ -1491,83 +1495,88 @@
         }
         setInterval(updateDateTime, 1000);
         updateDateTime();
-        
+
         // Slideshow functionality
         let idleTimer;
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slideshow-image');
         const indicators = document.querySelectorAll('.indicator-dot');
         const slideshowOverlay = document.getElementById('slideshow-overlay');
-        
-        // Function to reset idle timer
+        let slideshowInterval;
+
         function resetIdleTimer() {
             clearTimeout(idleTimer);
-            idleTimer = setTimeout(showSlideshow, 10000); // 10 seconds
+            idleTimer = setTimeout(showSlideshow, 5000); // 5 seconds
         }
-        
-        // Function to show slideshow
+
         function showSlideshow() {
             slideshowOverlay.style.display = 'flex';
             showSlide(0);
             startSlideshow();
         }
-        
-        // Function to hide slideshow
+
         function hideSlideshow() {
+            // Instantly hide overlay and images
             slideshowOverlay.style.display = 'none';
             stopSlideshow();
+            // Remove transitions and active class for instant hide
+            slides.forEach(slide => {
+                slide.style.transition = 'none';
+                slide.classList.remove('active');
+            });
+            // Re-enable transitions after a short delay for next time
+            setTimeout(() => {
+                slides.forEach(slide => {
+                    slide.style.transition = '';
+                });
+            }, 50);
         }
-        
-        // Function to show specific slide
+
         function showSlide(index) {
             slides.forEach((slide, i) => {
                 slide.classList.remove('active');
                 indicators[i].classList.remove('active');
             });
-            
             slides[index].classList.add('active');
             indicators[index].classList.add('active');
             currentSlide = index;
         }
-        
-        // Function to start automatic slideshow
+
         function startSlideshow() {
+            stopSlideshow(); // Prevent multiple intervals
             slideshowInterval = setInterval(() => {
                 currentSlide = (currentSlide + 1) % slides.length;
                 showSlide(currentSlide);
             }, 3000); // Change slide every 3 seconds
         }
-        
-        // Function to stop automatic slideshow
+
         function stopSlideshow() {
             if (slideshowInterval) {
                 clearInterval(slideshowInterval);
             }
         }
-        
-        // Event listeners for user activity
+
         const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'];
         events.forEach(event => {
             document.addEventListener(event, resetIdleTimer, true);
         });
-        
-        // Click on slideshow to return to dashboard
+
         slideshowOverlay.addEventListener('click', function(e) {
-            if (e.target === slideshowOverlay || e.target.classList.contains('slideshow-container')) {
-                hideSlideshow();
+            hideSlideshow();
+            setTimeout(() => {
                 resetIdleTimer();
-            }
+            }, 100);
         });
-        
-        // Click on indicator dots to navigate slides
+
         indicators.forEach((indicator, index) => {
             indicator.addEventListener('click', function(e) {
                 e.stopPropagation();
                 showSlide(index);
+                stopSlideshow();
+                startSlideshow();
             });
         });
-        
-        // Initialize idle timer
+
         resetIdleTimer();
     </script>
 </body>

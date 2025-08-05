@@ -21,7 +21,9 @@ const dbConfig = {
     timeout: 60000,
     reconnect: true,
     connectionLimit: 10,
-    queueLimit: 0
+    queueLimit: 0,
+    timezone: 'local', // Use local timezone to prevent date shifting
+    dateStrings: true  // Return dates as strings instead of Date objects
 };
 
 // Create connection pool

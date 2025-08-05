@@ -1241,7 +1241,16 @@
                         let fullName = [firstName, middleName, lastName].filter(Boolean).join(' ');
                         if (!fullName) fullName = '-';
                         const patientId = record.patientId || record.patient_id || record["Patient ID"] || '-';
-                        const birthdate = (record.birthdate || record.Birthdate || '').split('T')[0] || '-';
+                        // Handle birthdate - the server now returns dates as strings in YYYY-MM-DD format
+                        let birthdateStr = record.birthdate || record.Birthdate || '';
+                        let birthdate = '-';
+                        
+                        if (birthdateStr) {
+                            // The server should now return dates as strings in YYYY-MM-DD format
+                            // Just use the string directly to avoid any timezone issues
+                            birthdate = birthdateStr.toString();
+                            console.log('Using birthdate string directly:', birthdate);
+                        }
                         const age = record.age || record.Age || '-';
                         const address = record.address || record.Address || '-';
                         const mobile = record.mobile || record.mobile_no || record["Mobile No."] || '-';
@@ -1572,11 +1581,15 @@
                             overflow: hidden !important;
                             page-break-inside: avoid !important;
                         }
+                        .results-container {
+                            margin: 0 !important;
+                            padding: 0 !important;
+                        }
                         .results-container h2 {
                             display: none !important;
                         }
                         .patient-record-id-header {
-                            padding: 6px 12px 4px 12px !important;
+                            padding: 40px 12px 4px 12px !important;
                             height: 60px !important;
                             border-top: none !important;
                             box-shadow: none !important;
@@ -1600,7 +1613,7 @@
                             line-height: 1.1 !important;
                         }
                         .patient-record-id-body {
-                            padding: 12px 12px 6px 12px !important;
+                            padding: 15px 12px 8px 12px !important;
                             gap: 16px !important;
                             height: 200px !important;
                         }
@@ -1613,11 +1626,14 @@
                             border-radius: 6px !important;
                             border: 1px solid #ddd !important;
                             background-color: #f5f5f5 !important;
+                            margin-left: 10px !important;
+                        
                         }
                         .id-info-section {
                             font-size: 0.65rem !important;
                             gap: 2px !important;
                             flex: 1 !important;
+                            margin-left: 10px !important;
                         }
                         .id-info-row {
                             gap: 4px !important;
@@ -1626,11 +1642,11 @@
                         }
                         .id-label {
                             min-width: 55px !important;
-                            font-size: 0.6rem !important;
+                            font-size: 0.65rem !important;
                             font-weight: 600 !important;
                         }
                         .id-value {
-                            font-size: 0.6rem !important;
+                            font-size: 0.65rem !important;
                             word-break: break-word !important;
                         }
                         .id-slogan {
@@ -1643,6 +1659,7 @@
                         #print-patient-id, #close-modal { display: none !important; }
                         .id-patient-info-title {
                             font-size: 0.85rem !important;
+                            margin-top: 35px !important;
                         }
                     }
                 </style>

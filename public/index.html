@@ -1324,11 +1324,11 @@
                                 // Create video element
                                 const video = document.createElement('video');
                                 video.style.cssText = `
-                                    width: 80%;
-                                    max-width: 640px;
-                                    height: auto;
+                                    width: 400px;
+                                    height: 400px;
                                     border-radius: 12px;
                                     background: #000;
+                                    object-fit: cover;
                                 `;
                                 video.autoplay = true;
                                 video.playsInline = true;
@@ -1608,8 +1608,8 @@
                             flex: 0 0 60px !important;
                         }
                         .id-photo-placeholder {
-                            width: 55px !important;
-                            height: 55px !important;
+                            width: 96px !important;
+                            height: 96px !important;
                             border-radius: 6px !important;
                             border: 1px solid #ddd !important;
                             background-color: #f5f5f5 !important;
@@ -1684,7 +1684,7 @@
 
         function resetIdleTimer() {
             clearTimeout(idleTimer);
-            idleTimer = setTimeout(showSlideshow, 5000); // 5 seconds
+            idleTimer = setTimeout(showSlideshow, 15000); // 15 seconds
         }
 
         function showSlideshow() {
